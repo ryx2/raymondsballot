@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "validate:state-guides": "bun scripts/validate-state-guides.mjs",
     "convert:images": "bun run scripts/convert-images.mjs",
     "prebuild": "bun run convert:images"
   },
