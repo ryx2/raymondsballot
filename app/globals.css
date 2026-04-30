@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f5f1e8;
+  --paper-deep: #ece6d6;
+  --ink: #1a1a1a;
+  --ink-muted: #4a4a4a;
+  --ink-faint: #8a8a8a;
+  --rule: #1a1a1a;
+  --rule-soft: #d8d2c1;
+
+  --accent: #d63d2e;        /* signal orange-red */
+  --accent-deep: #a82a1d;
+  --accent-soft: #f3c8b9;
+  --blue: #2c5282;
+  --blue-deep: #1a365d;
+  --blue-soft: #c4d4e8;
+  --gold: #d4a017;
+  --green: #1d4f3f;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-rule-soft: var(--rule-soft);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-soft: var(--accent-soft);
+  --color-blue: var(--blue);
+  --color-blue-deep: var(--blue-deep);
+  --color-blue-soft: var(--blue-soft);
+  --color-gold: var(--gold);
+  --color-green: var(--green);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-archivo);
+  --font-mono: var(--font-mono-data);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  font-stretch: 90%;
+  letter-spacing: -0.01em;
+}
+
+.font-data {
+  font-family: var(--font-mono-data), ui-monospace, monospace;
+  font-feature-settings: "tnum", "lnum";
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.tabnum {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Editorial small caps label */
+.eyebrow {
+  font-family: var(--font-archivo), sans-serif;
+  font-stretch: 90%;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+/* Heavy editorial rule */
+.rule-heavy {
+  border-top: 3px solid var(--rule);
+}
+.rule-thin {
+  border-top: 1px solid var(--rule);
+}
+.rule-soft {
+  border-top: 1px solid var(--rule-soft);
+}
+
+/* Stance bars */
+.stance-bar {
+  height: 4px;
+  background: var(--rule-soft);
+  position: relative;
+  border-radius: 1px;
+}
+.stance-bar > span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 1px;
+}
+
+/* Subtle cell hover */
+.row-hover:hover {
+  background: var(--paper-deep);
+}
+
+/* Paper-feel print look on tables */
+table.editorial {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+table.editorial th,
+table.editorial td {
+  text-align: left;
+  padding: 0.75rem 0.75rem;
+  border-bottom: 1px solid var(--rule-soft);
+  vertical-align: top;
+}
+table.editorial thead th {
+  border-bottom: 2px solid var(--rule);
+  font-family: var(--font-archivo), sans-serif;
+  font-stretch: 90%;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+}
+
+/* Used in candidate avatar circles */
+.initials {
+  font-family: var(--font-archivo), sans-serif;
+  font-weight: 800;
+  font-stretch: 90%;
+  letter-spacing: -0.02em;
+}
