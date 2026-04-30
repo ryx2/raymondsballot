@@ -2,11 +2,18 @@
 
 import { useMemo } from "react";
 import { geoMercator } from "d3-geo";
+import type {
+  ExtendedFeature,
+  ExtendedFeatureCollection,
+  GeoGeometryObjects,
+} from "d3-geo";
+import type { GeoJsonProperties } from "geojson";
 import {
   ComposableMap,
   Geographies,
   Geography,
 } from "react-simple-maps";
+import type { ProjectionFunction } from "react-simple-maps";
 import { feature } from "topojson-client";
 import countiesAtlas from "us-atlas/counties-10m.json";
 import { County } from "@/data/counties";
@@ -14,11 +21,13 @@ import { County } from "@/data/counties";
 const MAP_WIDTH = 975;
 const MAP_HEIGHT = 610;
 const MAP_PADDING = 44;
+type CountyFeature = ExtendedFeature<GeoGeometryObjects, GeoJsonProperties>;
+type CountyFeatureCollection = ExtendedFeatureCollection<CountyFeature>;
 
 const ALL_COUNTY_FEATURES = feature(
   countiesAtlas as never,
   countiesAtlas.objects.counties as never
-);
+) as unknown as CountyFeatureCollection;
 
 interface Props {
   stateSlug: string;
@@ -39,7 +48,7 @@ export default function CountyPicker({
   const selectedCounty = counties.find(
     (county) => county.slug === selectedCountySlug
   );
-  const stateCountyFeatures = useMemo(
+  const stateCountyFeatures = useMemo<CountyFeatureCollection>(
     () => ({
       type: "FeatureCollection" as const,
       features: ALL_COUNTY_FEATURES.features.filter((countyFeature) =>
@@ -58,20 +67,21 @@ export default function CountyPicker({
         : undefined,
     [selectedCounty, stateCountyFeatures]
   );
-  const projection = useMemo(
-    () =>
-      geoMercator().fitExtent(
-        [
-          [selectedCountyFeature ? 92 : MAP_PADDING, selectedCountyFeature ? 72 : MAP_PADDING],
-          [
-            MAP_WIDTH - (selectedCountyFeature ? 92 : MAP_PADDING),
-            MAP_HEIGHT - (selectedCountyFeature ? 72 : MAP_PADDING),
-          ],
-        ],
-        selectedCountyFeature ?? stateCountyFeatures
-      ),
-    [selectedCountyFeature, stateCountyFeatures]
-  );
+  const projection = useMemo<ProjectionFunction>(() => {
+    const paddingX = selectedCountyFeature ? 92 : MAP_PADDING;
+    const paddingY = selectedCountyFeature ? 72 : MAP_PADDING;
+    const extent: [[number, number], [number, number]] = [
+      [paddingX, paddingY],
+      [MAP_WIDTH - paddingX, MAP_HEIGHT - paddingY],
+    ];
+    const mapProjection = geoMercator();
+
+    const fittedProjection = selectedCountyFeature
+      ? mapProjection.fitExtent(extent, selectedCountyFeature)
+      : mapProjection.fitExtent(extent, stateCountyFeatures);
+
+    return () => fittedProjection;
+  }, [selectedCountyFeature, stateCountyFeatures]);
 
   return (
     <div className="border-t-2 border-ink pt-5">
