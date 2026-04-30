@@ -22,7 +22,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "California 2026 — Democratic Primary for Governor",
+  title: "Raymond's Ballot — California Democratic Primary for Governor 2026",
   description:
     "Side-by-side comparison of the Democratic candidates running for Governor of California in the June 2, 2026 primary.",
 };
@@ -40,12 +40,12 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <header className="border-b-[3px] border-ink bg-paper">
           <div className="mx-auto w-full max-w-6xl px-6 py-4 flex items-center justify-between gap-6">
-            <Link href="/" className="flex items-baseline gap-3">
+            <Link href="/" className="flex items-baseline gap-2">
               <span className="font-display font-black text-2xl md:text-3xl tracking-tight leading-none">
-                CA<span className="text-accent">/2026</span>
+                Raymond&rsquo;s<span className="text-accent">·</span>Ballot
               </span>
-              <span className="hidden sm:block eyebrow leading-none">
-                Democratic Primary · Governor
+              <span className="hidden md:block eyebrow leading-none">
+                CA · Governor · 2026
               </span>
             </Link>
             <nav className="flex items-center gap-5 text-sm font-medium">
@@ -65,7 +65,7 @@ export default function RootLayout({
         <footer className="mt-24 border-t-[3px] border-ink bg-paper-deep">
           <div className="mx-auto w-full max-w-6xl px-6 py-8 flex flex-col md:flex-row gap-4 md:items-center md:justify-between text-sm text-ink-muted">
             <div>
-              <span className="eyebrow">CA/2026</span>{" "}
+              <span className="eyebrow">Raymond&rsquo;s Ballot</span>{" "}
               <span className="ml-2">
                 A reader-focused comparison of the candidates for Governor of
                 California, June 2, 2026 Democratic Primary.

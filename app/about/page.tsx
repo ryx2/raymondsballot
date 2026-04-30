@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CANDIDATES, ISSUES, PRIMARY_DATE } from "@/data/candidates";
 
 export const metadata = {
-  title: "About — California 2026",
+  title: "About — Raymond's Ballot",
   description:
     "How we built the comparison: methodology, sources, and editorial choices.",
 };

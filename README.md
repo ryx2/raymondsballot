@@ -1,4 +1,4 @@
-# California 2026 — Democratic Primary for Governor
+# Raymond's Ballot — California Democratic Primary for Governor 2026
 
 A side-by-side comparison of the Democratic candidates running for Governor of California in the **June 2, 2026** primary.
 
