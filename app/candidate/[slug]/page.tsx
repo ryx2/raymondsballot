@@ -9,7 +9,6 @@ import {
 } from "@/data/candidates";
 import CandidateAvatar from "@/components/CandidateAvatar";
 import HBar from "@/components/HBar";
-import StanceCell from "@/components/StanceCell";
 
 export function generateStaticParams() {
   return CANDIDATES.map((c) => ({ slug: c.slug }));
@@ -52,13 +51,37 @@ export default async function CandidatePage(
       <header
         className="border-y-[3px] border-ink py-8 grid md:grid-cols-[auto_1fr_auto] items-start gap-6 md:gap-10"
         style={{
-          backgroundImage: `linear-gradient(to right, ${c.color}10, transparent 40%)`,
+          backgroundImage: `linear-gradient(to right, ${c.color}1A, transparent 50%)`,
         }}
       >
-        <CandidateAvatar name={c.fullName} color={c.color} size={140} />
+        <div className="space-y-2">
+          <CandidateAvatar
+            name={c.fullName}
+            color={c.color}
+            imageUrl={c.imageUrl}
+            size={180}
+          />
+          {c.imageAttribution && (
+            <div className="text-[10px] text-ink-faint font-data leading-tight max-w-[180px]">
+              {c.imageAttribution}
+            </div>
+          )}
+        </div>
         <div className="min-w-0">
-          <div className="eyebrow mb-2">
-            {c.lane} · {c.region}
+          <div className="flex items-center gap-3 mb-2">
+            <span
+              className="font-data text-[11px] uppercase tracking-wider font-bold px-2 py-0.5"
+              style={{
+                background: c.party === "Democratic" ? "#1d4ed8" : "#b91c1c",
+                color: "white",
+                borderRadius: 2,
+              }}
+            >
+              {c.party}
+            </span>
+            <span className="eyebrow">
+              {c.lane} · {c.region}
+            </span>
           </div>
           <h1 className="font-display font-black text-5xl md:text-6xl leading-[0.98] tracking-tight">
             {c.fullName}
@@ -266,7 +289,12 @@ export default async function CandidatePage(
               href={`/candidate/${o.slug}`}
               className="flex items-center gap-3 border border-rule-soft p-3 hover:bg-paper-deep transition-colors"
             >
-              <CandidateAvatar name={o.fullName} color={o.color} size={36} />
+              <CandidateAvatar
+                name={o.fullName}
+                color={o.color}
+                imageUrl={o.imageUrl}
+                size={40}
+              />
               <div className="min-w-0">
                 <div className="font-display font-bold text-sm truncate">
                   {o.fullName}

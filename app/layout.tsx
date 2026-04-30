@@ -22,9 +22,9 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Raymond's Ballot — California Democratic Primary for Governor 2026",
+  title: "Raymond's Ballot - 2026 State Primary Guides",
   description:
-    "Side-by-side comparison of the Democratic candidates running for Governor of California in the June 2, 2026 primary.",
+    "Pick your state and compare candidates in the 2026 primary guides.",
 };
 
 export default function RootLayout({
@@ -45,12 +45,15 @@ export default function RootLayout({
                 Raymond&rsquo;s<span className="text-accent">·</span>Ballot
               </span>
               <span className="hidden md:block eyebrow leading-none">
-                CA · Governor · 2026
+                State primaries · 2026
               </span>
             </Link>
             <nav className="flex items-center gap-5 text-sm font-medium">
+              <Link href="/states" className="hover:text-accent">
+                States
+              </Link>
               <Link href="/" className="hover:text-accent">
-                Candidates
+                California
               </Link>
               <Link href="/compare" className="hover:text-accent">
                 Compare
@@ -67,8 +70,8 @@ export default function RootLayout({
             <div>
               <span className="eyebrow">Raymond&rsquo;s Ballot</span>{" "}
               <span className="ml-2">
-                A reader-focused comparison of the candidates for Governor of
-                California, June 2, 2026 Democratic Primary.
+                State-by-state primary guides, starting with California
+                Governor on June 2, 2026.
               </span>
             </div>
             <div className="font-data text-xs">

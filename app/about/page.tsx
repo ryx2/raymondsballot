@@ -15,11 +15,12 @@ export default function AboutPage() {
         How we built the comparison.
       </h1>
       <p className="mt-6 text-lg text-ink-muted leading-relaxed">
-        California's June 2, 2026 primary is the most consequential Democratic
-        gubernatorial contest in a generation. With six serious candidates and
-        a near-majority of voters undecided, the difference between coverage
-        that drives understanding and coverage that drives noise comes down to
-        whether you can put candidates on the same axis.
+        California&apos;s June 2, 2026 primary is the most consequential
+        gubernatorial contest in a generation. Because California uses a top-two
+        primary, the two highest finishers — regardless of party — advance to
+        November. We profile the leading Democrats and Republicans on the same
+        eight issues so you can compare them apples-to-apples instead of
+        soundbite to soundbite.
       </p>
 
       <section className="mt-12 space-y-4 border-t-2 border-ink pt-6">
@@ -55,18 +56,29 @@ export default function AboutPage() {
       <section className="mt-12 space-y-4 border-t-2 border-ink pt-6">
         <div className="eyebrow">Field</div>
         <h2 className="font-display font-black text-2xl tracking-tight">
-          Who's in this comparison
+          Who&apos;s in this comparison
         </h2>
         <p className="text-ink-muted leading-relaxed">
-          We include every Democrat polling above one percent in publicly
-          released surveys and every Democrat who has filed with the California
-          Secretary of State and reported at least seven figures of cumulative
-          fundraising. The {PRIMARY_DATE} ballot includes additional minor
-          candidates not profiled here.
+          We profile every Democrat and Republican who qualified for the May 5,
+          2026 CNN gubernatorial debate, plus Tony Thurmond. Eric Swalwell
+          suspended his campaign on April 12, 2026 and Betty Yee suspended
+          hers on April 20. The {PRIMARY_DATE} ballot includes 61 total
+          candidates, most of whom are minor and not profiled here.
         </p>
         <ul className="grid sm:grid-cols-2 gap-2 mt-4">
           {CANDIDATES.map((c) => (
-            <li key={c.slug}>
+            <li key={c.slug} className="flex items-baseline gap-2">
+              <span
+                className="font-data text-[10px] uppercase tracking-wider font-bold px-1 py-0.5 shrink-0"
+                style={{
+                  background:
+                    c.party === "Democratic" ? "#1d4ed8" : "#b91c1c",
+                  color: "white",
+                  borderRadius: 2,
+                }}
+              >
+                {c.party === "Democratic" ? "DEM" : "REP"}
+              </span>
               <Link
                 href={`/candidate/${c.slug}`}
                 className="hover:text-accent font-medium"
@@ -80,7 +92,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mt-12 space-y-4 border-t-2 border-ink pt-6">
-        <div className="eyebrow">What is — and isn't — sourced</div>
+        <div className="eyebrow">What is — and isn&apos;t — sourced</div>
         <p className="text-ink-muted leading-relaxed">
           Polling averages and fundraising totals on this prototype are
           illustrative placeholders. Before publication, replace them with
@@ -105,9 +117,18 @@ export default function AboutPage() {
       </section>
 
       <section className="mt-12 space-y-4 border-t-2 border-ink pt-6">
+        <div className="eyebrow">Photos</div>
+        <p className="text-ink-muted leading-relaxed">
+          Candidate portraits are sourced from Wikimedia Commons. Each
+          candidate&apos;s profile page lists the original credit (campaign portrait,
+          official government portrait, etc.) per the project&apos;s licensing terms.
+        </p>
+      </section>
+
+      <section className="mt-12 space-y-4 border-t-2 border-ink pt-6">
         <div className="eyebrow">Get on the ballot</div>
         <p className="text-ink-muted leading-relaxed">
-          The California Democratic primary for Governor is{" "}
+          California&apos;s primary for Governor is{" "}
           <span className="font-data text-ink">{PRIMARY_DATE}</span>. Mail
           ballots are sent in early May. Confirm your registration at{" "}
           <a
