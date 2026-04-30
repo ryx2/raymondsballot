@@ -57,31 +57,22 @@ export default async function StatePage(props: PageProps<"/states/[slug]">) {
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink-muted">
               {guide.summary}
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              {hasCaliforniaDashboard ? (
-                <>
-                  <Link
-                    href="/"
-                    className="border border-ink bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors hover:bg-paper hover:text-ink"
-                  >
-                    Open full guide
-                  </Link>
-                  <Link
-                    href="/compare"
-                    className="border border-rule-soft px-4 py-2 text-sm font-medium transition-colors hover:border-ink hover:bg-paper-deep"
-                  >
-                    Compare candidates
-                  </Link>
-                </>
-              ) : (
+            {hasCaliforniaDashboard && (
+              <div className="mt-6 flex flex-wrap gap-3">
                 <Link
-                  href="/states"
+                  href="/"
+                  className="border border-ink bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors hover:bg-paper hover:text-ink"
+                >
+                  Open full guide
+                </Link>
+                <Link
+                  href="/compare"
                   className="border border-rule-soft px-4 py-2 text-sm font-medium transition-colors hover:border-ink hover:bg-paper-deep"
                 >
-                  Pick another state
+                  Compare candidates
                 </Link>
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           <div className="border-l-2 border-rule-soft pl-5">

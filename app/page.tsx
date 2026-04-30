@@ -50,9 +50,9 @@ export default function Home() {
               Pick the state where you vote.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">
-              Start from the U.S. map, then open the primary guide for your
-              state. California is live now, and the rest of the map is ready
-              for state-by-state guides as they are added.
+              Click on the state where you vote. California is live now, and
+              the rest of the map is ready for state-by-state guides as they
+              are added.
             </p>
             <div className="mt-8 grid grid-cols-2 gap-5 border-t-2 border-ink pt-5">
               <Stat
@@ -67,12 +67,6 @@ export default function Home() {
                 accent
               />
             </div>
-            <Link
-              href="/states"
-              className="mt-6 inline-flex border border-ink bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors hover:bg-paper hover:text-ink"
-            >
-              Open state picker
-            </Link>
           </div>
 
           <StateTileMap showList={false} />

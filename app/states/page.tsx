@@ -26,9 +26,9 @@ export default function StatesPage() {
               Find your 2026 primary guide.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">
-              Pick your state from the map. California is live now, and the
-              state pages are being filled with governor-primary candidate
-              data, source links, and usable candidate portraits.
+              Click on the state where you vote. Each state page has the
+              governor-primary guide, source links, and county selection layered
+              on top.
             </p>
             <div className="mt-8 grid grid-cols-3 gap-4 border-t-2 border-ink pt-5">
               <MiniStat label="States" value={STATES.length.toString()} />
