@@ -98,7 +98,7 @@ export const CANDIDATES: Candidate[] = [
     region: "Orange County",
     born: 1974,
     lane: "Progressive",
-    imageUrl: "/candidates/katie-porter.jpg",
+    imageUrl: "/candidates/cache/katie-porter.webp",
     imageAttribution: "Official congressional portrait, 2019 / Wikimedia Commons",
     oneLine: "Whiteboard-wielding consumer advocate from the U.S. House.",
     pitch:
@@ -197,7 +197,7 @@ export const CANDIDATES: Candidate[] = [
     region: "Bay Area",
     born: 1957,
     lane: "Progressive",
-    imageUrl: "/candidates/tom-steyer.jpg",
+    imageUrl: "/candidates/cache/tom-steyer.webp",
     imageAttribution: "NYC Climate Week 2025 / Wikimedia Commons",
     oneLine: "Billionaire climate organizer turned self-funded gubernatorial candidate.",
     pitch:
@@ -296,7 +296,7 @@ export const CANDIDATES: Candidate[] = [
     region: "Sacramento",
     born: 1958,
     lane: "Mainstream",
-    imageUrl: "/candidates/xavier-becerra.jpg",
+    imageUrl: "/candidates/cache/xavier-becerra.webp",
     imageAttribution: "U.S. Department of Health & Human Services official portrait, 2021",
     oneLine: "Biden's HHS secretary returning to California politics.",
     pitch:
@@ -395,7 +395,7 @@ export const CANDIDATES: Candidate[] = [
     region: "Los Angeles",
     born: 1953,
     lane: "Moderate",
-    imageUrl: "/candidates/antonio-villaraigosa.jpg",
+    imageUrl: "/candidates/cache/antonio-villaraigosa.webp",
     imageAttribution: "Hollywood Walk of Fame ceremony, 2013 / Wikimedia Commons",
     oneLine: "Two-term LA mayor making a second run at the governorship.",
     pitch:
@@ -494,7 +494,7 @@ export const CANDIDATES: Candidate[] = [
     region: "Bay Area",
     born: 1982,
     lane: "Moderate",
-    imageUrl: "/candidates/matt-mahan.jpg",
+    imageUrl: "/candidates/cache/matt-mahan.webp",
     imageAttribution: "Farmer's market appearance, April 2026 / Wikimedia Commons",
     oneLine: "Tech-Democrat mayor of San Jose with a tough-love homelessness pitch.",
     pitch:
@@ -593,7 +593,7 @@ export const CANDIDATES: Candidate[] = [
     region: "Bay Area",
     born: 1968,
     lane: "Progressive",
-    imageUrl: "/candidates/tony-thurmond.jpg",
+    imageUrl: "/candidates/cache/tony-thurmond.webp",
     imageAttribution: "Official Assembly portrait / Wikimedia Commons",
     oneLine: "The schools-first progressive trying to break out of single digits.",
     pitch:
@@ -694,7 +694,7 @@ export const CANDIDATES: Candidate[] = [
     region: "Bay Area",
     born: 1969,
     lane: "Trumpist",
-    imageUrl: "/candidates/steve-hilton.jpg",
+    imageUrl: "/candidates/cache/steve-hilton.webp",
     imageAttribution: "Public appearance, 2024 / Wikimedia Commons",
     oneLine: "British-born Fox News populist with a Trump endorsement and a housing pitch.",
     pitch:
@@ -792,7 +792,7 @@ export const CANDIDATES: Candidate[] = [
     region: "Inland Empire",
     born: 1966,
     lane: "Trumpist",
-    imageUrl: "/candidates/chad-bianco.jpg",
+    imageUrl: "/candidates/cache/chad-bianco.webp",
     imageAttribution: "Official sheriff's portrait, 2025 / Wikimedia Commons",
     oneLine: "Riverside sheriff who defied COVID rules now running on law-and-order.",
     pitch:

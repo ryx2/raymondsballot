@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "convert:images": "bun run scripts/convert-images.mjs",
+    "prebuild": "bun run convert:images"
   },
   "dependencies": {
     "next": "16.2.4",
