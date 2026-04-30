@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import CountyPicker from "@/components/CountyPicker";
 import StateTileMap from "@/components/StateTileMap";
-import { CANDIDATES, PRIMARY_DATE, RACE_TITLE } from "@/data/candidates";
-import { STATES, getState, hasStateGuide } from "@/data/states";
+import StateGuideCandidateCard from "@/components/StateGuideCandidateCard";
+import { getCountiesByStateSlug } from "@/data/counties";
+import { STATES, getState } from "@/data/states";
+import { getStateGuideOrFallback } from "@/data/stateGuides";
 
 export function generateStaticParams() {
   return STATES.map((state) => ({ slug: state.slug }));
@@ -12,10 +15,12 @@ export async function generateMetadata(props: PageProps<"/states/[slug]">) {
   const { slug } = await props.params;
   const state = getState(slug);
   if (!state) return { title: "State not found" };
+  const guide = getStateGuideOrFallback(state.slug);
+  if (!guide) return { title: "State not found" };
 
   return {
-    title: `${state.name} primary guide - Raymond's Ballot`,
-    description: `Pick up the ${state.name} 2026 primary guide.`,
+    title: `${guide.stateName} primary guide - Raymond's Ballot`,
+    description: guide.summary,
   };
 }
 
@@ -24,7 +29,13 @@ export default async function StatePage(props: PageProps<"/states/[slug]">) {
   const state = getState(slug);
   if (!state) notFound();
 
-  const isLive = hasStateGuide(state.slug);
+  const guide = getStateGuideOrFallback(state.slug);
+  if (!guide) notFound();
+
+  const hasCaliforniaDashboard = state.slug === "california";
+  const hasCandidates = guide.candidates.length > 0;
+  const statusLabel = statusText(guide.status);
+  const counties = getCountiesByStateSlug(state.slug);
 
   return (
     <article className="mx-auto w-full max-w-6xl px-6 py-10">
@@ -44,12 +55,10 @@ export default async function StatePage(props: PageProps<"/states/[slug]">) {
               {state.name} primary guide
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink-muted">
-              {isLive
-                ? "This guide is live. Open the full California dashboard for candidate profiles, polling, fundraising, and issue comparisons."
-                : "This state page is ready for the next candidate guide. The map keeps the state-picking experience in place while the primary data gets filled in."}
+              {guide.summary}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              {isLive ? (
+              {hasCaliforniaDashboard ? (
                 <>
                   <Link
                     href="/"
@@ -76,22 +85,71 @@ export default async function StatePage(props: PageProps<"/states/[slug]">) {
           </div>
 
           <div className="border-l-2 border-rule-soft pl-5">
-            <Datum label="Status" value={isLive ? "Live" : "Coming soon"} />
+            <Datum label="Status" value={statusLabel} />
             <Datum label="State" value={state.postalAbbreviation} />
             <Datum label="Region" value={state.region} />
-            {isLive && (
-              <>
-                <Datum label="Race" value={RACE_TITLE} />
-                <Datum label="Primary" value={PRIMARY_DATE} />
-                <Datum
-                  label="Candidates"
-                  value={CANDIDATES.length.toString()}
-                />
-              </>
-            )}
+            <Datum label="Office" value={guide.office} />
+            <Datum
+              label="Primary"
+              value={guide.primaryDate ?? "No 2026 governor primary"}
+            />
+            <Datum
+              label="Election"
+              value={guide.electionDate ?? "No 2026 governor race"}
+            />
+            <Datum label="Candidates" value={guide.candidates.length.toString()} />
           </div>
         </div>
       </header>
+
+      <section className="mt-12">
+        <CountyPicker stateSlug={state.slug} counties={counties} />
+      </section>
+
+      <section className="mt-12">
+        <div className="mb-6 border-b-2 border-ink pb-3">
+          <div className="eyebrow">Candidate field</div>
+          <h2 className="font-display text-3xl font-black tracking-tight">
+            {hasCandidates
+              ? `${guide.candidates.length} candidates tracked`
+              : statusLabel}
+          </h2>
+        </div>
+
+        {hasCandidates ? (
+          <div className="grid gap-x-8 gap-y-10 md:grid-cols-2">
+            {guide.candidates.map((candidate) => (
+              <StateGuideCandidateCard
+                key={candidate.id}
+                candidate={candidate}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="border-l-4 border-rule-soft pl-5 text-ink-muted">
+            {guide.status === "no-2026-governor-race"
+              ? `${guide.stateName} does not hold a regularly scheduled governor election in 2026.`
+              : "Candidate data for this state still needs source review before publishing."}
+          </div>
+        )}
+      </section>
+
+      {guide.sourceUrls.length > 0 && (
+        <section className="mt-12 border-t-2 border-ink pt-5">
+          <div className="eyebrow mb-3">Sources</div>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            {guide.sourceUrls.map((sourceUrl) => (
+              <a
+                key={sourceUrl}
+                href={sourceUrl}
+                className="text-accent hover:underline"
+              >
+                {sourceLabel(sourceUrl)}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mt-12">
         <div className="mb-5 border-b-2 border-ink pb-3">
@@ -104,6 +162,27 @@ export default async function StatePage(props: PageProps<"/states/[slug]">) {
       </section>
     </article>
   );
+}
+
+function statusText(status: string): string {
+  switch (status) {
+    case "live":
+      return "Live";
+    case "researched":
+      return "Researched";
+    case "no-2026-governor-race":
+      return "No 2026 governor race";
+    default:
+      return "Needs review";
+  }
+}
+
+function sourceLabel(sourceUrl: string): string {
+  try {
+    return new URL(sourceUrl).hostname.replace(/^www\./, "");
+  } catch {
+    return sourceUrl;
+  }
 }
 
 function Datum({ label, value }: { label: string; value: string }) {

@@ -14,7 +14,8 @@ import HBar from "@/components/HBar";
 import StanceCell from "@/components/StanceCell";
 import PositioningChart from "@/components/PositioningChart";
 import StateTileMap from "@/components/StateTileMap";
-import { READY_STATE_SLUGS, STATES } from "@/data/states";
+import { STATES } from "@/data/states";
+import { STATE_GUIDES } from "@/data/stateGuides";
 
 const TODAY = new Date("2026-04-29");
 const PRIMARY_DAY = new Date("2026-06-02");
@@ -33,6 +34,10 @@ export default function Home() {
     UNDECIDED_PCT
   );
   const maxFunds = Math.max(...CANDIDATES.map((c) => c.fundraisingMillions));
+  const stateCandidateCount = STATE_GUIDES.reduce(
+    (sum, guide) => sum + guide.candidates.length,
+    0
+  );
 
   return (
     <div className="mx-auto w-full max-w-6xl px-6 py-10">
@@ -56,9 +61,9 @@ export default function Home() {
                 sub="Pick from the map"
               />
               <Stat
-                label="Live guide"
-                value={READY_STATE_SLUGS.length.toString()}
-                sub="California now"
+                label="Candidates"
+                value={stateCandidateCount.toString()}
+                sub="State guide data"
                 accent
               />
             </div>

@@ -21,10 +21,62 @@ const mono = JetBrains_Mono({
   weight: ["400", "500", "700"],
 });
 
+const SITE_URL = "https://raymondsballot.com";
+const SITE_NAME = "Raymond's Ballot";
+const SITE_DESCRIPTION =
+  "Side-by-side comparison of every candidate in California's June 2, 2026 primary for governor — eight candidates scored on the same eight issues with a data-journalism aesthetic.";
+
 export const metadata: Metadata = {
-  title: "Raymond's Ballot - 2026 State Primary Guides",
-  description:
-    "Pick your state and compare candidates in the 2026 primary guides.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — California 2026 Primary for Governor`,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: "Raymond Xu" }],
+  keywords: [
+    "California governor 2026",
+    "California primary 2026",
+    "Newsom successor",
+    "Katie Porter",
+    "Tom Steyer",
+    "Steve Hilton",
+    "Chad Bianco",
+    "Xavier Becerra",
+    "Antonio Villaraigosa",
+    "Matt Mahan",
+    "Tony Thurmond",
+    "voter guide",
+    "candidate comparison",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    title: `${SITE_NAME} — California 2026 Primary for Governor`,
+    description: SITE_DESCRIPTION,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} — California 2026 Primary for Governor`,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -38,6 +90,33 @@ export default function RootLayout({
       className={`${inter.variable} ${archivo.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: SITE_NAME,
+              alternateName: "raymondsballot",
+              url: SITE_URL,
+              description: SITE_DESCRIPTION,
+              inLanguage: "en-US",
+              publisher: {
+                "@type": "Person",
+                name: "Raymond Xu",
+              },
+              about: {
+                "@type": "Event",
+                name: "California 2026 Gubernatorial Primary",
+                startDate: "2026-06-02",
+                location: {
+                  "@type": "AdministrativeArea",
+                  name: "California",
+                },
+              },
+            }),
+          }}
+        />
         <header className="border-b-[3px] border-ink bg-paper">
           <div className="mx-auto w-full max-w-6xl px-6 py-4 flex items-center justify-between gap-6">
             <Link href="/" className="flex items-baseline gap-2">

@@ -2,7 +2,7 @@
 
 A side-by-side comparison of the Democratic candidates running for Governor of California in the **June 2, 2026** primary.
 
-Built as a static Next.js 16 site in the spirit of FiveThirtyEight: data-forward, editorial typography, restrained palette, every candidate scored on the same eight issues so they can be read apples-to-apples.
+Built as a static Next.js 16 site with a data-journalism aesthetic: data-forward, editorial typography, restrained palette, every candidate scored on the same eight issues so they can be read apples-to-apples.
 
 ## Stack
 
