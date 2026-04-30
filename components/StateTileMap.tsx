@@ -160,7 +160,7 @@ function StateGeography({
   const stroke = selected ? "var(--paper)" : "var(--paper)";
 
   return (
-    <a href={`/states/${state.slug}`} aria-label={`${state.name} primary guide`}>
+    <a href={`/states/${state.slug}`} aria-label={`${state.name} ballot lookup`}>
       <title>
         {state.name} ({state.postalAbbreviation})
       </title>

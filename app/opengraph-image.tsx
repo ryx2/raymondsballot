@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Raymond's Ballot — California 2026 Primary for Governor";
+  "Raymond's Ballot — Find every race on your ballot";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -34,8 +34,8 @@ export default async function OpengraphImage() {
             color: "#4a4a4a",
           }}
         >
-          <span>A Race-Watch Dashboard</span>
-          <span style={{ color: "#d63d2e" }}>· June 2, 2026</span>
+          <span>Address-Based Ballot Lookup</span>
+          <span style={{ color: "#d63d2e" }}>· 2026</span>
         </div>
 
         <div
@@ -78,7 +78,8 @@ export default async function OpengraphImage() {
               flexWrap: "wrap",
             }}
           >
-            Side-by-side comparison of every candidate for California Governor in the June 2 primary.
+            Pick your state and county, then enter an address to find local,
+            state, federal, and ballot-measure contests.
           </div>
         </div>
 
@@ -92,9 +93,9 @@ export default async function OpengraphImage() {
           }}
         >
           <div style={{ display: "flex", gap: 60 }}>
-            <Stat label="Candidates" value="8" />
-            <Stat label="Issues" value="8" />
-            <Stat label="Parties" value="2" />
+            <Stat label="States" value="50" />
+            <Stat label="Counties" value="3K+" />
+            <Stat label="Lookup" value="Live" />
           </div>
           <div
             style={{

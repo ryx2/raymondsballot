@@ -24,30 +24,25 @@ const mono = JetBrains_Mono({
 const SITE_URL = "https://raymondsballot.com";
 const SITE_NAME = "Raymond's Ballot";
 const SITE_DESCRIPTION =
-  "Side-by-side comparison of every candidate in California's June 2, 2026 primary for governor — eight candidates scored on the same eight issues with a data-journalism aesthetic.";
+  "Address-based ballot lookup for U.S. voters, with state and county maps plus featured candidate guides for major races.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — California 2026 Primary for Governor`,
+    default: `${SITE_NAME} — Find Every Race on Your Ballot`,
     template: `%s · ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   authors: [{ name: "Raymond Xu" }],
   keywords: [
-    "California governor 2026",
-    "California primary 2026",
-    "Newsom successor",
-    "Katie Porter",
-    "Tom Steyer",
-    "Steve Hilton",
-    "Chad Bianco",
-    "Xavier Becerra",
-    "Antonio Villaraigosa",
-    "Matt Mahan",
-    "Tony Thurmond",
+    "ballot lookup",
     "voter guide",
+    "local elections",
+    "county elections",
+    "Google Civic",
+    "sample ballot",
+    "2026 elections",
     "candidate comparison",
   ],
   alternates: {
@@ -57,13 +52,13 @@ export const metadata: Metadata = {
     type: "website",
     siteName: SITE_NAME,
     url: SITE_URL,
-    title: `${SITE_NAME} — California 2026 Primary for Governor`,
+    title: `${SITE_NAME} — Find Every Race on Your Ballot`,
     description: SITE_DESCRIPTION,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — California 2026 Primary for Governor`,
+    title: `${SITE_NAME} — Find Every Race on Your Ballot`,
     description: SITE_DESCRIPTION,
   },
   robots: {
@@ -106,13 +101,8 @@ export default function RootLayout({
                 name: "Raymond Xu",
               },
               about: {
-                "@type": "Event",
-                name: "California 2026 Gubernatorial Primary",
-                startDate: "2026-06-02",
-                location: {
-                  "@type": "AdministrativeArea",
-                  name: "California",
-                },
+                "@type": "Thing",
+                name: "Address-based ballot lookup and voter guides",
               },
             }),
           }}
@@ -124,7 +114,7 @@ export default function RootLayout({
                 Raymond&rsquo;s<span className="text-accent">·</span>Ballot
               </span>
               <span className="hidden md:block eyebrow leading-none">
-                State primaries · 2026
+                Local ballots · 2026
               </span>
             </Link>
             <nav className="flex items-center gap-5 text-sm font-medium">
@@ -132,7 +122,7 @@ export default function RootLayout({
                 States
               </Link>
               <Link href="/" className="hover:text-accent">
-                California
+                Featured
               </Link>
               <Link href="/compare" className="hover:text-accent">
                 Compare
@@ -149,8 +139,8 @@ export default function RootLayout({
             <div>
               <span className="eyebrow">Raymond&rsquo;s Ballot</span>{" "}
               <span className="ml-2">
-                State-by-state primary guides, starting with California
-                Governor on June 2, 2026.
+                Address-based ballot lookup with state, county, and featured
+                race guides.
               </span>
             </div>
             <div className="font-data text-xs">

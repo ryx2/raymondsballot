@@ -107,7 +107,7 @@ export default function CivicBallotLookup({
       <div className="mb-5">
         <div className="eyebrow mb-2">Exact ballot lookup</div>
         <h2 className="font-display text-3xl font-black tracking-tight">
-          Pull races for an address in {countyName}.
+          Pull every race Google Civic has for an address in {countyName}.
         </h2>
       </div>
 
@@ -155,8 +155,9 @@ export default function CivicBallotLookup({
 
       <p className="mt-3 text-xs leading-relaxed text-ink-faint">
         Google Civic is address-based. A county can contain many districts, so a
-        street address is needed for the complete ballot. The address is sent to
-        Google Civic through this server and is not stored by this app.
+        street address is needed to find the contests tied to one voter&apos;s
+        ballot. The address is sent to Google Civic through this server and is
+        not stored by this app.
       </p>
 
       {error && (
@@ -216,7 +217,9 @@ export default function CivicBallotLookup({
             </div>
           ) : (
             <div className="border-l-4 border-rule-soft pl-4 text-sm text-ink-muted">
-              No contests were returned for this address/election.
+              No contests were returned for this address/election. That usually
+              means Google Civic does not have ballot data for that location or
+              election yet.
             </div>
           )}
         </div>

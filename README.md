@@ -1,8 +1,10 @@
-# Raymond's Ballot — California Democratic Primary for Governor 2026
+# Raymond's Ballot
 
-A side-by-side comparison of the Democratic candidates running for Governor of California in the **June 2, 2026** primary.
+Address-based ballot lookup for U.S. voters, with state and county maps plus featured candidate guides for major races.
 
-Built as a static Next.js 16 site with a data-journalism aesthetic: data-forward, editorial typography, restrained palette, every candidate scored on the same eight issues so they can be read apples-to-apples.
+The core flow is state -> county -> residential address. The server-side Google Civic lookup returns contests available for that exact ballot when Google has data for the location/election. Static candidate guides, including the California governor comparison, are supplemental featured-race context.
+
+Built as a Next.js 16 site with a data-journalism aesthetic: data-forward, editorial typography, restrained palette, and an address lookup path for complete local ballot data when Google Civic has coverage.
 
 ## Stack
 
@@ -33,11 +35,12 @@ bun start          # serve the production build
 2. In Vercel, **Add New → Project**, import the repo.
 3. Framework preset: **Next.js**. Root directory: this folder.
 4. Install command: `bun install`. Build command: `bun run build`.
-5. Deploy. No environment variables required.
+5. Set `GOOGLE_CIVIC_API_KEY` in Vercel for the live ballot lookup route.
+6. Deploy.
 
-## Editing the data
+## Editing the featured race data
 
-All candidate content lives in [`data/candidates.ts`](data/candidates.ts). Each candidate has:
+California featured-race content lives in [`data/candidates.ts`](data/candidates.ts). Statewide featured-race summaries live in `data/stateGuides/`. These files are not the full local ballot; the full address-based contest list comes from the Google Civic API route.
 
 - Bio, current/past roles, region, lane (Progressive / Mainstream / Moderate / Establishment)
 - A signature pitch and the strengths / challenges of their bid
@@ -65,7 +68,8 @@ The "last updated" stamp in the layout footer should be moved to a `lastUpdated`
 app/
   layout.tsx              -- header, footer, fonts, theme tokens
   globals.css             -- editorial palette and typography
-  page.tsx                -- home: hero, polling chart, fundraising, candidate grid
+  page.tsx                -- home: state map plus featured race dashboard
+  api/civic/voter-info/route.ts -- server-side Google Civic voterInfo proxy
   about/page.tsx          -- methodology and sourcing notes
   candidate/[slug]/page.tsx  -- profile per candidate
   compare/page.tsx        -- full matrix and stance distribution
@@ -74,7 +78,9 @@ components/
   HBar.tsx                -- horizontal bar chart row
   StanceCell.tsx          -- color-coded stance pill + headline
 data/
-  candidates.ts           -- all candidate content + issue schema
+  candidates.ts           -- California featured race candidate content
+  counties.ts             -- county FIPS/slugs for state -> county routing
+  stateGuides/            -- featured statewide race context by state
 ```
 
 ## License

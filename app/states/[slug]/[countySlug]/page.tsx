@@ -17,7 +17,7 @@ export async function generateMetadata(
 
   return {
     title: `${county.name}, ${state.postalAbbreviation} - Raymond's Ballot`,
-    description: `County-localized 2026 primary guide for ${county.name}, ${state.name}.`,
+    description: `Address-based ballot lookup for ${county.name}, ${state.name}.`,
   };
 }
 
@@ -52,10 +52,10 @@ export default async function CountyPage(
               {county.name}
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink-muted">
-              Enter a residential address in {county.name} to pull the exact
-              contests Google Civic has for that ballot. The shared statewide{" "}
-              {guide.office.toLowerCase()} guide stays below for statewide
-              candidate context.
+              Enter a residential address in {county.name} to pull the races
+              and ballot measures Google Civic has for that exact ballot. The
+              featured statewide race section below is supplemental context,
+              not the complete ballot.
             </p>
           </div>
 
@@ -63,9 +63,10 @@ export default async function CountyPage(
             <Datum label="State" value={state.name} />
             <Datum label="County" value={county.name} />
             <Datum label="FIPS" value={county.fips} />
-            <Datum label="State guide" value={statusText(guide.status)} />
+            <Datum label="Lookup" value="Address based" />
+            <Datum label="Featured race" value={statusText(guide.status)} />
             <Datum
-              label="Candidates"
+              label="Featured candidates"
               value={guide.candidates.length.toString()}
             />
           </div>
@@ -90,10 +91,15 @@ export default async function CountyPage(
 
       <section className="mt-12">
         <div className="mb-6 border-b-2 border-ink pb-3">
-          <div className="eyebrow">Shared statewide guide</div>
+          <div className="eyebrow">Featured statewide race</div>
           <h2 className="font-display text-3xl font-black tracking-tight">
-            {guide.stateName} {guide.office} candidates
+            {guide.stateName} {guide.office} context
           </h2>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-ink-muted">
+            This is one featured statewide race. Use the address lookup above
+            for the local races, district races, judicial contests, and ballot
+            measures that can vary by precinct.
+          </p>
         </div>
 
         {guide.candidates.length > 0 ? (
@@ -107,7 +113,9 @@ export default async function CountyPage(
           </div>
         ) : (
           <div className="border-l-4 border-rule-soft pl-5 text-ink-muted">
-            {guide.summary}
+            {guide.status === "no-2026-governor-race"
+              ? `${guide.stateName} does not have a featured 2026 governor race here. The address lookup above is still the path for available ballot contests.`
+              : guide.summary}
           </div>
         )}
       </section>
@@ -131,7 +139,7 @@ function statusText(status: string): string {
     case "researched":
       return "Researched";
     case "no-2026-governor-race":
-      return "No 2026 governor race";
+      return "No featured governor race";
     default:
       return "Needs review";
   }

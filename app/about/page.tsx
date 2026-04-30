@@ -4,7 +4,7 @@ import { CANDIDATES, ISSUES, PRIMARY_DATE } from "@/data/candidates";
 export const metadata = {
   title: "About — Raymond's Ballot",
   description:
-    "How we built the comparison: methodology, sources, and editorial choices.",
+    "How Raymond's Ballot combines address-based ballot lookup with sourced candidate guides.",
 };
 
 export default function AboutPage() {
@@ -12,9 +12,15 @@ export default function AboutPage() {
     <div className="mx-auto w-full max-w-3xl px-6 py-12">
       <div className="eyebrow mb-2">About this project</div>
       <h1 className="font-display font-black text-5xl leading-[1.02] tracking-tight">
-        How we built the comparison.
+        Find the races tied to where you vote.
       </h1>
       <p className="mt-6 text-lg text-ink-muted leading-relaxed">
+        Raymond&apos;s Ballot starts with a state and county map, then uses a
+        residential address to ask Google Civic for the contests available for
+        that ballot. Static candidate guides, like the California governor
+        comparison below, are supplemental context for major races.
+      </p>
+      <p className="mt-4 text-lg text-ink-muted leading-relaxed">
         California&apos;s June 2, 2026 primary is the most consequential
         gubernatorial contest in a generation. Because California uses a top-two
         primary, the two highest finishers — regardless of party — advance to

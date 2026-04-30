@@ -50,9 +50,9 @@ export default function Home() {
               Pick the state where you vote.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">
-              Click on the state where you vote. California is live now, and
-              the rest of the map is ready for state-by-state guides as they
-              are added.
+              Click on the state where you vote, then choose your county and
+              enter your address to pull the contests Google Civic has for your
+              exact ballot.
             </p>
             <div className="mt-8 grid grid-cols-2 gap-5 border-t-2 border-ink pt-5">
               <Stat
@@ -63,7 +63,7 @@ export default function Home() {
               <Stat
                 label="Candidates"
                 value={stateCandidateCount.toString()}
-                sub="State guide data"
+                sub="Featured race data"
                 accent
               />
             </div>
@@ -76,7 +76,7 @@ export default function Home() {
       {/* HERO */}
       <section className="mt-12 border-b-2 border-ink pb-8">
         <div className="eyebrow mb-4">
-          A race-watch dashboard · Updated April 29, 2026
+          Featured race watch · Updated April 29, 2026
         </div>
         <h1 className="font-display font-black text-[2.6rem] md:text-6xl leading-[1.02] tracking-tight max-w-4xl">
           Eight people are running to lead California after Newsom.{" "}

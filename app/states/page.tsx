@@ -6,7 +6,7 @@ import { STATE_GUIDES } from "@/data/stateGuides";
 export const metadata = {
   title: "Choose your state - Raymond's Ballot",
   description:
-    "Pick a state from the U.S. map to open its 2026 primary guide.",
+    "Pick a state from the U.S. map, choose your county, and enter an address to find races on your ballot.",
 };
 
 export default function StatesPage() {
@@ -23,12 +23,12 @@ export default function StatesPage() {
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.35fr] lg:items-start">
           <div>
             <h1 className="font-display text-5xl font-black leading-[1.02] tracking-tight md:text-6xl">
-              Find your 2026 primary guide.
+              Find every race on your ballot.
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">
-              Click on the state where you vote. Each state page has the
-              governor-primary guide, source links, and county selection layered
-              on top.
+              Click on the state where you vote, choose your county, then enter
+              your residential address for the contests Google Civic has for
+              that exact ballot.
             </p>
             <div className="mt-8 grid grid-cols-3 gap-4 border-t-2 border-ink pt-5">
               <MiniStat label="States" value={STATES.length.toString()} />
@@ -46,14 +46,14 @@ export default function StatesPage() {
 
       <section className="mt-12 grid gap-8 md:grid-cols-3">
         <div className="border-t-2 border-ink pt-4 md:col-span-2">
-          <div className="eyebrow mb-2">Live guide</div>
+          <div className="eyebrow mb-2">Featured race guide</div>
           <h2 className="font-display text-3xl font-black tracking-tight">
             California governor, 2026
           </h2>
           <p className="mt-3 leading-relaxed text-ink-muted">
-            The California page already has the full comparison: candidate
-            profiles, polling, fundraising, issue stances, and a side-by-side
-            matrix.
+            The California governor comparison is a featured race guide. It is
+            supplemental to the address-based ballot lookup, which is the path
+            for local, state, federal, and ballot-measure contests.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
@@ -74,10 +74,9 @@ export default function StatesPage() {
         <div className="border-t-2 border-ink pt-4">
           <div className="eyebrow mb-2">Coverage model</div>
           <p className="text-sm leading-relaxed text-ink-muted">
-            Each state page is structured as a primary guide entry point. The
-            map gives users one obvious first action before they get into a
-            candidate-specific dashboard, and states without 2026 governor
-            elections are labeled clearly.
+            State pages start with geography because ballots are local. The
+            static candidate cards are featured race context; the complete race
+            list comes from the address lookup on county pages.
           </p>
         </div>
       </section>
