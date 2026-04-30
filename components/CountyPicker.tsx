@@ -6,6 +6,7 @@ import type {
   ExtendedFeature,
   ExtendedFeatureCollection,
   GeoGeometryObjects,
+  GeoProjection,
 } from "d3-geo";
 import type { GeoJsonProperties } from "geojson";
 import {
@@ -13,7 +14,7 @@ import {
   Geographies,
   Geography,
 } from "react-simple-maps";
-import type { ProjectionFunction } from "react-simple-maps";
+import type { ComposableMapProps } from "react-simple-maps";
 import { feature } from "topojson-client";
 import countiesAtlas from "us-atlas/counties-10m.json";
 import { County } from "@/data/counties";
@@ -67,7 +68,7 @@ export default function CountyPicker({
         : undefined,
     [selectedCounty, stateCountyFeatures]
   );
-  const projection = useMemo<ProjectionFunction>(() => {
+  const projection = useMemo<GeoProjection>(() => {
     const paddingX = selectedCountyFeature ? 92 : MAP_PADDING;
     const paddingY = selectedCountyFeature ? 72 : MAP_PADDING;
     const extent: [[number, number], [number, number]] = [
@@ -76,11 +77,9 @@ export default function CountyPicker({
     ];
     const mapProjection = geoMercator();
 
-    const fittedProjection = selectedCountyFeature
+    return selectedCountyFeature
       ? mapProjection.fitExtent(extent, selectedCountyFeature)
       : mapProjection.fitExtent(extent, stateCountyFeatures);
-
-    return () => fittedProjection;
   }, [selectedCountyFeature, stateCountyFeatures]);
 
   return (
@@ -99,7 +98,7 @@ export default function CountyPicker({
 
       <div className="border-2 border-ink bg-paper-deep p-3 md:p-5">
         <ComposableMap
-          projection={projection}
+          projection={projection as unknown as ComposableMapProps["projection"]}
           width={MAP_WIDTH}
           height={MAP_HEIGHT}
           className="h-auto w-full"
