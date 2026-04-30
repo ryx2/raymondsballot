@@ -17,9 +17,13 @@ export async function generateMetadata(props: PageProps<"/states/[slug]">) {
   if (!state) return { title: "State not found" };
   const guide = getStateGuideOrFallback(state.slug);
   if (!guide) return { title: "State not found" };
+  const pageTitle =
+    guide.status === "no-2026-governor-race"
+      ? `${guide.stateName} election guide`
+      : `${guide.stateName} primary guide`;
 
   return {
-    title: `${guide.stateName} primary guide - Raymond's Ballot`,
+    title: `${pageTitle} - Raymond's Ballot`,
     description: guide.summary,
   };
 }
@@ -34,6 +38,10 @@ export default async function StatePage(props: PageProps<"/states/[slug]">) {
 
   const hasCaliforniaDashboard = state.slug === "california";
   const hasCandidates = guide.candidates.length > 0;
+  const hasNoGovernorRace = guide.status === "no-2026-governor-race";
+  const pageTitle = hasNoGovernorRace
+    ? `${state.name} election guide`
+    : `${state.name} primary guide`;
   const statusLabel = statusText(guide.status);
   const counties = getCountiesByStateSlug(state.slug);
 
@@ -52,10 +60,13 @@ export default async function StatePage(props: PageProps<"/states/[slug]">) {
         <div className="grid gap-8 lg:grid-cols-[1fr_320px] lg:items-start">
           <div>
             <h1 className="font-display text-5xl font-black leading-[1.02] tracking-tight md:text-6xl">
-              {state.name} primary guide
+              {pageTitle}
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink-muted">
               {guide.summary}
+              {hasNoGovernorRace
+                ? " Choose a county below to open the address-based ballot lookup for federal, state, and local races Google Civic has available."
+                : ""}
             </p>
             {hasCaliforniaDashboard && (
               <div className="mt-6 flex flex-wrap gap-3">
@@ -81,11 +92,11 @@ export default async function StatePage(props: PageProps<"/states/[slug]">) {
             <Datum label="Region" value={state.region} />
             <Datum label="Office" value={guide.office} />
             <Datum
-              label="Primary"
+              label="Governor primary"
               value={guide.primaryDate ?? "No 2026 governor primary"}
             />
             <Datum
-              label="Election"
+              label="Governor election"
               value={guide.electionDate ?? "No 2026 governor race"}
             />
             <Datum label="Candidates" value={guide.candidates.length.toString()} />
@@ -99,11 +110,15 @@ export default async function StatePage(props: PageProps<"/states/[slug]">) {
 
       <section className="mt-12">
         <div className="mb-6 border-b-2 border-ink pb-3">
-          <div className="eyebrow">Candidate field</div>
+          <div className="eyebrow">
+            {hasNoGovernorRace ? "Governor race" : "Candidate field"}
+          </div>
           <h2 className="font-display text-3xl font-black tracking-tight">
             {hasCandidates
               ? `${guide.candidates.length} candidates tracked`
-              : statusLabel}
+              : hasNoGovernorRace
+                ? "No 2026 governor election"
+                : statusLabel}
           </h2>
         </div>
 
@@ -119,7 +134,7 @@ export default async function StatePage(props: PageProps<"/states/[slug]">) {
         ) : (
           <div className="border-l-4 border-rule-soft pl-5 text-ink-muted">
             {guide.status === "no-2026-governor-race"
-              ? `${guide.stateName} does not hold a regularly scheduled governor election in 2026.`
+              ? `${guide.stateName} does not hold a regularly scheduled governor election in 2026. That does not mean the state has no 2026 contests; pick a county above for the exact ballot lookup.`
               : "Candidate data for this state still needs source review before publishing."}
           </div>
         )}
