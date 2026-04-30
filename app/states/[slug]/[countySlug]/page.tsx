@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import CivicBallotLookup from "@/components/CivicBallotLookup";
 import CountyPicker from "@/components/CountyPicker";
 import StateGuideCandidateCard from "@/components/StateGuideCandidateCard";
 import { getCountiesByStateSlug, getCounty } from "@/data/counties";
@@ -51,10 +52,10 @@ export default async function CountyPage(
               {county.name}
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink-muted">
-              This county page reuses the statewide {guide.office.toLowerCase()}{" "}
-              guide for {state.name}. County-specific ballot details, local
-              election office links, and precinct information can layer in here
-              without duplicating candidate data.
+              Enter a residential address in {county.name} to pull the exact
+              contests Google Civic has for that ballot. The shared statewide{" "}
+              {guide.office.toLowerCase()} guide stays below for statewide
+              candidate context.
             </p>
           </div>
 
@@ -76,6 +77,14 @@ export default async function CountyPage(
           stateSlug={state.slug}
           counties={counties}
           selectedCountySlug={county.slug}
+        />
+      </section>
+
+      <section className="mt-12">
+        <CivicBallotLookup
+          countyName={county.name}
+          stateName={state.name}
+          statePostalAbbreviation={state.postalAbbreviation}
         />
       </section>
 
